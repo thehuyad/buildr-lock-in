@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- LOCK IN registrations and waitlist sign-ups go through one server function (`src/lib/applications.functions.ts`) into a single insert-only table; the shared zod schema in `src/lib/application-schema.ts` is the one source of form rules so browser and server validate identically.
+- Brand styling lives in `src/styles.css` tokens and utilities (`eyebrow`, `display`, `logotype`); components use those, never raw colours.
