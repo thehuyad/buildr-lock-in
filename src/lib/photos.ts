@@ -1,17 +1,13 @@
-import speakerTalk from "@/assets/buildr-speaker-talk.jpg.asset.json";
-import speakerSmile from "@/assets/buildr-speaker-smile.jpg.asset.json";
-import audienceRows from "@/assets/buildr-audience-rows.jpg.asset.json";
-import membersSeated from "@/assets/buildr-members-seated.jpg.asset.json";
-import teamStage from "@/assets/buildr-team-stage.jpg.asset.json";
-import whiteboard from "@/assets/buildr-whiteboard.jpg.asset.json";
-import groupSession from "@/assets/buildr-group-session.jpg.asset.json";
+import teamArmsOut from "@/assets/buildr-team-arms-out.jpg.asset.json";
+import speakerGesture from "@/assets/buildr-speaker-gesture.jpg.asset.json";
+import speakerFromBehind from "@/assets/buildr-speaker-from-behind.jpg.asset.json";
+import audienceColour from "@/assets/buildr-audience-colour.jpg.asset.json";
+import audienceMono from "@/assets/buildr-audience-mono.jpg.asset.json";
 
 export const photos = {
-  speakerTalk: speakerTalk.url,
-  speakerSmile: speakerSmile.url,
-  audienceRows: audienceRows.url,
-  membersSeated: membersSeated.url,
-  teamStage: teamStage.url,
-  whiteboard: whiteboard.url,
-  groupSession: groupSession.url,
+  teamArmsOut: teamArmsOut.url,
+  speakerGesture: speakerGesture.url,
+  speakerFromBehind: speakerFromBehind.url,
+  audienceColour: audienceColour.url,
+  audienceMono: audienceMono.url,
 };

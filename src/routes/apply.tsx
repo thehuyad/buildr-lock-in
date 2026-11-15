@@ -1,13 +1,15 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { applicationSchema, type ApplicationKind } from "@/lib/application-schema";
 import { submitApplication } from "@/lib/applications.functions";
+import { REGISTRATION_FEE_LABEL, REGISTRATION_PAYMENT_URL } from "@/lib/lock-in";
+import { BrandWord } from "@/components/site/BrandWord";
 
 type ApplySearch = { type?: ApplicationKind };
 
@@ -36,16 +38,20 @@ export const Route = createFileRoute("/apply")({
   component: Apply,
 });
 
-const options: { kind: ApplicationKind; title: string; body: string }[] = [
+const options: { kind: ApplicationKind; title: ReactNode; body: string }[] = [
   {
     kind: "register",
-    title: "Register for the next Lock In",
-    body: "Put yourself forward for one of fifteen seats.",
+    title: (
+      <>
+        Register for the next <BrandWord>Lock In</BrandWord>
+      </>
+    ),
+    body: `Put yourself forward for one of fifteen seats. ${REGISTRATION_FEE_LABEL} registration fee.`,
   },
   {
     kind: "waitlist",
     title: "Join the waitlist",
-    body: "Hear first when the next cohort opens.",
+    body: "Free. Hear first when the next cohort opens.",
   },
 ];
 
@@ -98,23 +104,43 @@ function Apply() {
   }
 
   if (status === "done") {
+    const registered = doneKind === "register";
     return (
       <section className="mx-auto max-w-3xl px-6 pb-16 pt-32 text-center md:pt-48">
         <div className="mx-auto flex size-14 animate-rise items-center justify-center rounded-full bg-brand text-brand-foreground">
           <Check className="size-6" />
         </div>
-        <h1 className="display mt-12 animate-rise text-4xl [animation-delay:120ms] md:text-6xl">
-          {doneKind === "register" ? "You're in the running" : "You're on the list"}
+        <h1 className="headline mt-12 animate-rise text-4xl [animation-delay:120ms] md:text-6xl">
+          {registered ? "One last step" : "You're on the list"}
           <span className="text-brand">.</span>
         </h1>
         <p className="mx-auto mt-8 max-w-md animate-rise text-base leading-relaxed text-muted-foreground [animation-delay:240ms]">
-          {doneKind === "register"
-            ? "Thank you for registering for the next LOCK IN. We'll be in touch about selection."
-            : "Thank you for joining the waitlist. You'll hear from us when the next LOCK IN opens."}
+          {registered ? (
+            <>
+              Your details are saved. Pay the {REGISTRATION_FEE_LABEL} registration fee on Paystack
+              to complete your registration for the next <BrandWord>LOCK IN</BrandWord>.
+            </>
+          ) : (
+            <>
+              Thank you for joining the waitlist. You'll hear from us when the next{" "}
+              <BrandWord>LOCK IN</BrandWord> opens.
+            </>
+          )}
         </p>
-        <Button asChild variant="link" className="mt-14">
-          <Link to="/">Back to BUILDR</Link>
-        </Button>
+        <div className="mt-14 flex animate-rise flex-col items-center justify-center gap-6 [animation-delay:320ms] sm:flex-row sm:gap-10">
+          {registered && (
+            <Button asChild size="lg">
+              <a href={REGISTRATION_PAYMENT_URL} target="_blank" rel="noopener noreferrer">
+                Pay {REGISTRATION_FEE_LABEL} on Paystack <ArrowUpRight />
+              </a>
+            </Button>
+          )}
+          <Button asChild variant="link">
+            <Link to="/">
+              Back to <BrandWord>BUILDR</BrandWord>
+            </Link>
+          </Button>
+        </div>
       </section>
     );
   }
@@ -123,13 +149,16 @@ function Apply() {
     <section className="mx-auto max-w-7xl px-6 pt-24 md:px-12 md:pt-44">
       <div className="grid gap-20 md:grid-cols-12 md:gap-12">
         <div className="md:col-span-5">
-          <p className="eyebrow animate-rise">Lock In</p>
-          <h1 className="display mt-10 animate-rise text-5xl [animation-delay:120ms] md:text-7xl">
+          <p className="eyebrow animate-rise">
+            <BrandWord>Lock In</BrandWord>
+          </p>
+          <h1 className="headline mt-10 animate-rise text-5xl [animation-delay:120ms] md:text-7xl">
             Claim your two weeks<span className="text-brand">.</span>
           </h1>
           <p className="mt-10 max-w-sm animate-rise text-base leading-relaxed text-muted-foreground [animation-delay:240ms]">
-            Fifteen members are selected for each LOCK IN. Register for the next cohort, or join the
-            waitlist and we'll let you know when it opens.
+            Fifteen members are selected for each <BrandWord>LOCK IN</BrandWord>. Register for the next
+            cohort for {REGISTRATION_FEE_LABEL}, or join the waitlist for free and we'll let you know
+            when it opens.
           </p>
         </div>
 
@@ -178,7 +207,15 @@ function Apply() {
               <Input id="phone" name="phone" type="tel" autoComplete="tel" maxLength={40} />
             </Field>
             <Field
-              label={kind === "register" ? "What will you build during Lock In?" : "What are you building?"}
+              label={
+                kind === "register" ? (
+                  <>
+                    What will you build during <BrandWord>Lock In</BrandWord>?
+                  </>
+                ) : (
+                  "What are you building?"
+                )
+              }
               name="building"
               optional={kind === "waitlist"}
               error={errors.building}
@@ -197,12 +234,23 @@ function Apply() {
 
             {formError && <p className="text-sm text-brand">{formError}</p>}
 
+            {kind === "register" && (
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Registration costs {REGISTRATION_FEE_LABEL}. After you submit, you'll pay it securely
+                on Paystack to complete your registration.
+              </p>
+            )}
+
             <div className="pt-6">
               <Button type="submit" size="lg" disabled={status === "sending"} className="w-full sm:w-auto">
                 {status === "sending"
                   ? "Sending…"
                   : kind === "register"
-                    ? "Register for Lock In"
+                    ? (
+                      <>
+                        Register for <BrandWord>Lock In</BrandWord>
+                      </>
+                    )
                     : "Join the waitlist"}
                 {status !== "sending" && <ArrowRight />}
               </Button>
@@ -221,7 +269,7 @@ function Field({
   error,
   children,
 }: {
-  label: string;
+  label: ReactNode;
   name: string;
   optional?: boolean | undefined;
   error?: string | undefined;

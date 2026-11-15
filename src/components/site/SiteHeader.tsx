@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
+import { BrandWord } from "./BrandWord";
 
 export function SiteHeader() {
   return (
@@ -14,7 +15,7 @@ export function SiteHeader() {
             className="eyebrow transition-colors duration-500 hover:text-foreground"
             activeProps={{ className: "text-foreground" }}
           >
-            Lock In
+            <BrandWord>Lock In</BrandWord>
           </Link>
           <Link
             to="/apply"

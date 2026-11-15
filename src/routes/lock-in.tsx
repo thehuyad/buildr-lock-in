@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CallToAction } from "@/components/site/CallToAction";
+import { BrandWord } from "@/components/site/BrandWord";
 import { photos } from "@/lib/photos";
+import { REGISTRATION_FEE_LABEL } from "@/lib/lock-in";
 
 export const Route = createFileRoute("/lock-in")({
   head: () => ({
@@ -31,14 +34,24 @@ export const Route = createFileRoute("/lock-in")({
   component: LockIn,
 });
 
-const steps = [
+const steps: { title: string; body: ReactNode }[] = [
   {
     title: "Register",
-    body: "Tell us who you are and what you want to build. Registration opens ahead of each cohort.",
+    body: (
+      <>
+        Tell us who you are and what you want to build, then pay the {REGISTRATION_FEE_LABEL}{" "}
+        registration fee. Registration opens ahead of each cohort.
+      </>
+    ),
   },
   {
     title: "Get selected",
-    body: "Fifteen members of the BUILDR community are chosen for each LOCK IN.",
+    body: (
+      <>
+        Fifteen members of the <BrandWord>BUILDR</BrandWord> community are chosen for each{" "}
+        <BrandWord>LOCK IN</BrandWord>.
+      </>
+    ),
   },
   {
     title: "Move in",
@@ -57,18 +70,31 @@ const covered = [
   { title: "Internet", body: "Reliable connection for shipping, deploying and learning." },
 ];
 
-const faqs = [
+const faqs: { q: ReactNode; a: ReactNode }[] = [
   {
-    q: "Who can join LOCK IN?",
-    a: "LOCK IN is for members of the BUILDR community — founders, entrepreneurs and builders with something real to work on.",
+    q: (
+      <>
+        Who can join <BrandWord>LOCK IN</BrandWord>?
+      </>
+    ),
+    a: (
+      <>
+        <BrandWord>LOCK IN</BrandWord> is for members of the <BrandWord>BUILDR</BrandWord> community —
+        founders, entrepreneurs and builders with something real to work on.
+      </>
+    ),
   },
   {
     q: "How much does it cost?",
-    a: "Nothing. Accommodation, feeding, electricity, internet and other necessities are provided for free.",
+    a: `Registering costs ${REGISTRATION_FEE_LABEL}, paid through Paystack. After that, the two weeks are free: accommodation, feeding, electricity, internet and other necessities are all provided.`,
   },
   {
     q: "How long is it, and how often does it happen?",
-    a: "Each LOCK IN runs for two weeks, and there are two cohorts every year.",
+    a: (
+      <>
+        Each <BrandWord>LOCK IN</BrandWord> runs for two weeks, and there are two cohorts every year.
+      </>
+    ),
   },
   {
     q: "How many people are selected?",
@@ -76,7 +102,7 @@ const faqs = [
   },
   {
     q: "What if registration is closed?",
-    a: "Join the waitlist and you'll be among the first to know when the next cohort opens.",
+    a: "Join the waitlist — it's free — and you'll be among the first to know when the next cohort opens.",
   },
 ];
 
@@ -85,12 +111,14 @@ function LockIn() {
     <>
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-6 pb-24 pt-24 md:px-12 md:pb-40 md:pt-44">
-        <p className="eyebrow animate-rise">The BUILDR bootcamp</p>
+        <p className="eyebrow animate-rise">
+          The <BrandWord>BUILDR</BrandWord> bootcamp
+        </p>
         <h1 className="logotype mt-10 animate-rise text-7xl [animation-delay:120ms] sm:text-8xl md:text-[11rem]">
           Lock <span className="text-brand">In</span>
         </h1>
         <div className="mt-14 grid animate-rise gap-12 [animation-delay:240ms] md:mt-20 md:grid-cols-12">
-          <p className="display text-2xl leading-snug md:col-span-7 md:text-4xl">
+          <p className="headline text-2xl leading-snug md:col-span-7 md:text-4xl">
             Two weeks. Fifteen builders. Nothing but building<span className="text-brand">.</span>
           </p>
           <div className="flex flex-col items-start gap-6 md:col-span-4 md:col-start-9 md:items-end md:justify-end">
@@ -109,11 +137,11 @@ function LockIn() {
       </section>
 
       <section className="mx-auto max-w-7xl animate-fade px-6 [animation-delay:400ms] md:px-12">
-        <div className="aspect-[4/5] overflow-hidden bg-ash sm:aspect-[16/8]">
+        <div className="photo aspect-[4/5] sm:aspect-[16/8]">
           <img
-            src={photos.speakerTalk}
+            src={photos.speakerGesture}
             alt="A BUILDR member speaking to the room"
-            className="h-full w-full object-cover object-[45%_30%]"
+            className="h-full w-full object-cover object-[48%_40%]"
           />
         </div>
       </section>
@@ -123,7 +151,7 @@ function LockIn() {
         <div className="grid gap-10 md:grid-cols-12">
           <p className="eyebrow md:col-span-4">How it works</p>
           <h2 className="display text-4xl md:col-span-8 md:text-6xl">
-            Leave home. Lock in. Come back with something built
+            Leave home. <BrandWord>Lock in.</BrandWord> Come back with something built
             <span className="text-brand">.</span>
           </h2>
         </div>
@@ -142,11 +170,11 @@ function LockIn() {
       <section className="mx-auto max-w-7xl px-6 pt-32 md:px-12 md:pt-56">
         <div className="grid gap-16 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
-            <div className="aspect-[4/5] overflow-hidden bg-ash">
+            <div className="photo aspect-[4/5]">
               <img
-                src={photos.membersSeated}
+                src={photos.audienceColour}
                 alt="BUILDR members seated during a session"
-                className="h-full w-full object-cover object-[50%_30%]"
+                className="h-full w-full object-cover object-[28%_50%]"
                 loading="lazy"
               />
             </div>
@@ -178,7 +206,7 @@ function LockIn() {
           <p className="eyebrow md:col-span-4">Questions</p>
           <Accordion type="single" collapsible className="border-t md:col-span-8">
             {faqs.map((f, i) => (
-              <AccordionItem key={f.q} value={`q-${i}`}>
+              <AccordionItem key={i} value={`q-${i}`}>
                 <AccordionTrigger className="py-8 text-left text-lg font-normal hover:no-underline md:text-xl">
                   {f.q}
                 </AccordionTrigger>

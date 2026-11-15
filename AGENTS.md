@@ -34,3 +34,5 @@ use the editor.
 - LOCK IN registrations and waitlist sign-ups go through one server function (`src/lib/applications.functions.ts`) into a single insert-only table; the shared zod schema in `src/lib/application-schema.ts` is the one source of form rules so browser and server validate identically.
 - Brand styling lives in `src/styles.css` tokens and utilities (`eyebrow`, `display`, `logotype`); components use those, never raw colours.
 - The original uploaded photos are archived in `images/` and are the repository's copy of record; the site serves them through the CDN pointers in `src/assets/*.asset.json`. Never delete `images/` as unused, and never hand-edit a pointer file.
+- The LOCK IN registration fee and its Paystack payment link live only in `src/lib/lock-in.ts`; pages import them so the price and link change in one place.
+- The words BUILDR and LOCK IN in page copy are wrapped in `BrandWord` (or use the `logotype` utility) so they always render bolder than surrounding text; photos sit in a `photo` frame for their rounded corners.

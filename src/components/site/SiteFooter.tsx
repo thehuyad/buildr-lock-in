@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
+import { BrandWord } from "./BrandWord";
 
 export function SiteFooter() {
   return (
@@ -15,12 +16,13 @@ export function SiteFooter() {
           </div>
           <div className="flex flex-col gap-4 md:items-end">
             <Link to="/lock-in" className="eyebrow transition-colors hover:text-foreground">
-              Lock In
+              <BrandWord>Lock In</BrandWord>
             </Link>
             <Link to="/apply" className="eyebrow transition-colors hover:text-foreground">
               Apply / Waitlist
             </Link>
-            <p className="eyebrow pt-6">© {new Date().getFullYear()} BUILDR</p>
+            <p className="eyebrow pt-6">© {new Date().getFullYear()} <BrandWord>BUILDR</BrandWord>
+            </p>
           </div>
         </div>
       </div>

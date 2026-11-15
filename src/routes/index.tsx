@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CallToAction } from "@/components/site/CallToAction";
+import { BrandWord } from "@/components/site/BrandWord";
 import { photos } from "@/lib/photos";
 
 export const Route = createFileRoute("/")({
@@ -41,18 +42,18 @@ function Index() {
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-6 pb-24 pt-24 md:px-12 md:pb-40 md:pt-44">
         <p className="eyebrow animate-rise">A community for builders</p>
-        <h1 className="display mt-10 max-w-5xl animate-rise text-[2.75rem] [animation-delay:120ms] sm:text-6xl md:text-[6.5rem]">
+        <h1 className="headline mt-10 max-w-5xl animate-rise text-[2.75rem] [animation-delay:120ms] sm:text-6xl md:text-[6.5rem]">
           For the ones who actually build<span className="text-brand">.</span>
         </h1>
         <div className="mt-14 grid animate-rise gap-14 [animation-delay:240ms] md:mt-20 md:grid-cols-12">
           <p className="max-w-md text-base leading-relaxed text-muted-foreground md:col-span-5 md:text-lg">
-            BUILDR brings founders, entrepreneurs and builders together. Twice a year, fifteen of us
-            leave everything behind to lock in.
+            <BrandWord>BUILDR</BrandWord> brings founders, entrepreneurs and builders together.
+            Twice a year, fifteen of us leave everything behind to <BrandWord>lock in</BrandWord>.
           </p>
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10 md:col-span-7 md:justify-end">
             <Button asChild size="lg">
               <Link to="/apply" search={{ type: "register" }}>
-                Register for Lock In <ArrowRight />
+                Register for <BrandWord>Lock In</BrandWord> <ArrowRight />
               </Link>
             </Button>
             <Button asChild variant="link">
@@ -66,11 +67,11 @@ function Index() {
 
       {/* Wide image */}
       <section className="mx-auto max-w-7xl animate-fade px-6 [animation-delay:400ms] md:px-12">
-        <div className="aspect-[4/5] overflow-hidden bg-ash sm:aspect-[16/9]">
+        <div className="photo aspect-[4/5] sm:aspect-[16/9]">
           <img
-            src={photos.teamStage}
-            alt="BUILDR members standing together at a session"
-            className="h-full w-full object-cover object-[60%_35%]"
+            src={photos.teamArmsOut}
+            alt="Four BUILDR members standing with arms outstretched in front of a red-striped wall"
+            className="h-full w-full object-cover object-[42%_50%]"
           />
         </div>
       </section>
@@ -85,7 +86,7 @@ function Index() {
               would rather ship than talk about shipping.
             </p>
             <p className="mt-12 max-w-lg text-base leading-relaxed text-muted-foreground">
-              BUILDR is where we learn from each other, hold each other accountable and keep moving.
+              <BrandWord>BUILDR</BrandWord> is where we learn from each other, hold each other accountable and keep moving.
               No noise. Just the work, and the people doing it with you.
             </p>
           </div>
@@ -108,7 +109,7 @@ function Index() {
               to="/lock-in"
               className="eyebrow mt-12 inline-flex items-center gap-3 text-foreground transition-colors duration-500 hover:text-brand"
             >
-              How Lock In works <ArrowRight className="size-4" />
+              How <BrandWord>Lock In</BrandWord> works <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>
@@ -144,11 +145,11 @@ function Index() {
             </ul>
           </div>
           <div className="md:col-span-6 md:col-start-7">
-            <div className="aspect-[4/5] overflow-hidden bg-ash">
+            <div className="photo aspect-[4/5]">
               <img
-                src={photos.whiteboard}
-                alt="A BUILDR member sketching ideas on a whiteboard"
-                className="h-full w-full object-cover object-[45%_40%]"
+                src={photos.speakerFromBehind}
+                alt="A BUILDR member presenting, seen from the audience"
+                className="h-full w-full object-cover object-[62%_50%]"
                 loading="lazy"
               />
             </div>
@@ -160,27 +161,27 @@ function Index() {
       <section className="mx-auto max-w-7xl px-6 pt-32 md:px-12 md:pt-56">
         <p className="eyebrow">04 — Moments</p>
         <div className="mt-12 grid gap-6 md:mt-16 md:grid-cols-12 md:gap-8">
-          <div className="aspect-[4/3] overflow-hidden bg-ash md:col-span-7">
+          <div className="photo aspect-[4/3] md:col-span-7">
             <img
-              src={photos.groupSession}
-              alt="Members in conversation during a BUILDR session"
-              className="h-full w-full object-cover object-top"
+              src={photos.audienceColour}
+              alt="BUILDR members seated in rows, listening closely"
+              className="h-full w-full object-cover object-center"
               loading="lazy"
             />
           </div>
-          <div className="aspect-[4/3] overflow-hidden bg-ash md:col-span-5 md:mt-32 md:aspect-[4/5]">
+          <div className="photo aspect-[4/3] md:col-span-5 md:mt-32 md:aspect-[4/5]">
             <img
-              src={photos.speakerSmile}
+              src={photos.speakerGesture}
               alt="A speaker presenting at BUILDR"
-              className="h-full w-full object-cover object-[45%_30%]"
+              className="h-full w-full object-cover object-[48%_40%]"
               loading="lazy"
             />
           </div>
-          <div className="aspect-[4/3] overflow-hidden bg-ash md:col-span-6 md:col-start-4 md:mt-8 md:aspect-[16/10]">
+          <div className="photo aspect-[4/3] md:col-span-6 md:col-start-4 md:mt-8 md:aspect-[16/10]">
             <img
-              src={photos.audienceRows}
-              alt="BUILDR members listening attentively"
-              className="h-full w-full object-cover object-top"
+              src={photos.audienceMono}
+              alt="BUILDR members listening attentively, in black and white"
+              className="h-full w-full object-cover object-center"
               loading="lazy"
             />
           </div>

@@ -11,7 +11,8 @@
 /*
  * BUILDR design system
  * Derived from the BUILDR logo: geometric sans (Montserrat), black letterforms,
- * a single red "R", white space and soft ash greys. Calm, square, unhurried.
+ * a single red "R", white space and soft ash greys. Calm, unhurried; UI is square,
+ * photos are softly rounded. The words BUILDR and LOCK IN are always set bold.
  */
 
 @theme inline {
@@ -72,6 +73,7 @@
 
 :root {
   --radius: 0px;
+  --radius-photo: 0.75rem; /* photos get softly rounded corners; other UI stays square */
 
   /* Logo palette */
   --ink: oklch(0.2 0.003 90); /* logo black */
@@ -157,13 +159,28 @@
   line-height: 1.05;
 }
 
-/* Wide uppercase logotype spacing */
+/* Bold hero headlines */
+@utility headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+/* Wide uppercase logotype spacing — used for BUILDR and LOCK IN, so always bold */
 @utility logotype {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   line-height: 1;
+}
+
+/* Frame for every photo: soft corners, ash placeholder while loading */
+@utility photo {
+  border-radius: var(--radius-photo);
+  overflow: hidden;
+  background-color: var(--ash);
 }
 
 @utility hairline {
